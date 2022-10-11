@@ -22,9 +22,20 @@ bool prost(int n) {
 
 
 
-int main()
-{
+int main() {
+    
     list<int> li { 1, 3, 0, 2, 4, 6, 8, 17, 56, 35, 23, 71 };
+    
+    /*
+    int n; 
+    int a[100];
+    
+    cin >> n;
+    
+    for (int i = 0; i < n; ++i) {
+        cin >> a[i];
+    }
+    */
 
     cout << "{ ";
 
