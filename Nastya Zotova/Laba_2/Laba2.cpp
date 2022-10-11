@@ -10,7 +10,7 @@ int main()
 
 	cin >> n;
 
-	cout << "VVedire elementi massiva" << endl;
+	cout << "VVedite elementi massiva" << endl;
 
 	for (i = 0; i < n; i++) {
 
