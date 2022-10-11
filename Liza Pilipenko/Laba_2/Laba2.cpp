@@ -2,39 +2,29 @@
 
 using namespace std;
 
+int main()
+{
+	int n, i;
 
-int main() {
-    setlocale(LC_ALL, "Russian");
-    int n;
-    cout << "Размер масива" << endl;
-    cin >> n;
+	cout << "VVedite razmer massiva" << endl;
 
-    int *mass = new int[n];
-    cout << "Элементы масива" << endl;
-    for (int r = 0; r < n; r++) {
-        cin >> mass[r];
-    }
+	cin >> n;
 
-    for (int i = 0; i < n; i++) {
-        int cnt = 0;
-        bool a = true;
-        for (int j = 0; j < n; j++) {
-            if (mass[i] == mass[j])
-                cnt += 1;
-        }
-        
-        for (int k = 0; k < i; k++) {
-            if (mass[i] == mass[k])
-                a = false;
-        }
-        
-        if ((cnt > 1) && (a != 0))
-            cout << mass[i] << ":" << cnt << endl;
+	cout << "VVedite elementi massiva" << endl;
+	
+	int *a = new int[n];
 
-    }
-    
-    delete[] mass;
+	for ( i = 0; i < n; i++) {
 
-    return(0);
-    
+		cin >> a[i];
+
+	}
+
+	cout << endl;
+
+	for (int i = n - 1; i >= 0; i--) {
+
+		cout << a[i] << " ";
+	}
+	return 0;
 }
