@@ -25,11 +25,10 @@ bool prost(int n) {
 int main()
 {
     list<int> li { 1, 3, 0, 2, 4, 6, 8, 17, 56, 35, 23, 71 };
-    list<int>::iterator iter;
 
     cout << "{ ";
 
-    for (int i = 0; i <= li.size(); i++) {
+    for (int i = 0; i <= li.size(); ++i) {
         if (prost(i)) {
            cout << i << " ";
         }
