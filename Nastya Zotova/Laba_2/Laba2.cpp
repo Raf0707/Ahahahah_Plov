@@ -4,7 +4,7 @@ using namespace std;
 
 int main()
 {
-	int a[100], n, c, i;
+	int a[100], n, i;
 
 	cout << "VVedite razmer massiva" << endl;
 
