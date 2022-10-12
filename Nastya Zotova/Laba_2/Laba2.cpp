@@ -25,8 +25,10 @@ int main()
 
 		cout << a[i] << " ";
 	}
-	
-	
+
+	for (int k = 0; k < n; ++k) {
+            cout << res[k] << " ";
+	}
 
 	return 0;
 
