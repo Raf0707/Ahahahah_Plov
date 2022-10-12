@@ -4,7 +4,7 @@ using namespace std;
 
 
 int main() {
-	setlocale(LC_ALl, "Russian");
+	setlocale(LC_ALL, "Russian");
 	int n;
 	cout << "Размер массива" << endl;
 	cin >> n;
@@ -24,7 +24,7 @@ int main() {
 		  }
 		  
 	    for (int k = 0; k < i; k++) {
-	    	  if (mass[i]) == mass[k])
+	    	  if (mass[i] == mass[k])
 	    	     a = false;
 	    }
 	    
