@@ -1,0 +1,18 @@
+#include <iostream>
+using namespace std;
+int main() {
+	char text[] = "kaKOYTO text";
+	char symbol;
+	int number_in_ASCII;
+	int i;
+	for (i = 0; i < sizeof(text) - 1; i++) {
+		number_in_ASCII = text[i];
+		if (i % 2 == 0 && number_in_ASCII >= 97 && number_in_ASCII <= 122)
+			symbol = number_in_ASCII - 32;
+		else if (i % 2 == 1 && number_in_ASCII >= 65 && number_in_ASCII <= 90)
+			symbol = number_in_ASCII + 32;
+		else
+			symbol = number_in_ASCII;
+		cout << symbol;
+	}
+}
