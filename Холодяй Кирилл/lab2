@@ -15,4 +15,5 @@ int main() {
 			symbol = number_in_ASCII;
 		cout << symbol;
 	}
+	return 0;
 }
