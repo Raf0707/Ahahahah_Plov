@@ -11,8 +11,6 @@ int main()
     cout << x << endl;
  
     ReversSum(x);
- 
- 
     return 0;
 }
  
@@ -21,12 +19,9 @@ void ReversSum(int x)
 {
   if(x == 0)
   return ;
-
     int y = x%10;
- 
     x /= 10;
  
     cout << y;
- 
    ReversSum(x);
 }
