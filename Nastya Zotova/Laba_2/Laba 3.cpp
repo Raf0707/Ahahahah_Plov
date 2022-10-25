@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
  
-void recursion(int x);
+void ReversSum(int x);
  
 int main()
 {
@@ -10,14 +10,14 @@ int main()
     int x = a + b;
     cout << x << endl;
  
-    recursion(x);
+    ReversSum(x);
  
  
     return 0;
 }
  
  
-void recursion(int x)
+void ReversSum(int x)
 {
   if(x == 0)
   return ;
@@ -28,5 +28,5 @@ void recursion(int x)
  
     cout << y;
  
-    recursion(x);
+   ReversSum(x);
 }
