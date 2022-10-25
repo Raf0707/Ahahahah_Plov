@@ -1,31 +1,32 @@
 #include <iostream>
 using namespace std;
-
-int Sum(int a, int b)
-{
-   return a + b ;
-}
  
- int Reverse(int *a, int *b)
- {
-   n = Sum(*a, *b);
-   while (n > 0)
-     n = n % 10;
-    int rev = rev * 10 + n;
-     n = n /10;
-     return n;
-     
- }
- 
- 
+void recursion(int x);
  
 int main()
 {
-   int a = 0;
-   int b = 0;
-   cin >> a >> b;
-   cout << "Summa chisel =  "<<Sum(a,b);
-   return 0;
-   
-   
+    int a,b;
+    cin >> a >> b;
+    int x = a + b;
+    cout << x << endl;
+ 
+    recursion(x);
+ 
+ 
+    return 0;
+}
+ 
+ 
+void recursion(int x)
+{
+  if(x == 0)
+  return ;
+
+    int y = x%10;
+ 
+    x /= 10;
+ 
+    cout << y;
+ 
+    recursion(x);
 }
