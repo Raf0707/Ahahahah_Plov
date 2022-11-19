@@ -1,7 +1,4 @@
 #include <iostream>
-#include <cmath>
-#include <algorithm>
-#include <list>
 
 using namespace std;
 
@@ -25,7 +22,7 @@ bool prost(int n) {
 int main() {
     
     int li[] = { 1, 3, 0, 2, 4, 6, 8, 17 };
-    cout << "{ ";
+ cout << "{ ";
 
     for (int i = 0; i <= (sizeof(li) / sizeof(li[0]); i++) {
         if (prost(li[i])) {
