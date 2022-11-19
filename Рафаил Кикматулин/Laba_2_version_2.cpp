@@ -1,4 +1,6 @@
 #include <iostream>
+#include <cmath>
+
 
 using namespace std;
 
@@ -24,7 +26,7 @@ int main() {
     int li[] = { 1, 3, 0, 2, 4, 6, 8, 17 };
  cout << "{ ";
 
-    for (int i = 0; i <= (sizeof(li) / sizeof(li[0]); i++) {
+    for (int i = 0; i <= (sizeof(li) / sizeof(li[0])); i++) {
         if (prost(li[i])) {
            cout << li[i] << " ";
         }
