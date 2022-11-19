@@ -25,21 +25,9 @@ bool prost(int n) {
 int main() {
     
     int li[] = { 1, 3, 0, 2, 4, 6, 8, 17 };
-    
-    /*
-    int n; 
-    int a[100];
-    
-    cin >> n;
-    
-    for (int i = 0; i < n; ++i) {
-        cin >> a[i];
-    }
-    */
-
     cout << "{ ";
 
-    for (int i = 0; i <= sizeof(li); i++) {
+    for (int i = 0; i <= (sizeof(li) / sizeof(li[0]); i++) {
         if (prost(li[i])) {
            cout << li[i] << " ";
         }
