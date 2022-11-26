@@ -7,7 +7,6 @@ void prost_chisla(int n, int res[]) {
     int divv = 2; 
     while (k < 3) { 
         while (n % divv == 0) { 
-            //cout << divv << " "; 
             res[k] = divv; 
             n = n / divv; 
             k++; 
@@ -28,13 +27,12 @@ int main() {
     int n; 
     cin >> n; 
     int res[3]; 
-    prost_chisla(n, res);
-    
     int a = sizeof(res) / sizeof(res[0]); 
+    
+    prost_chisla(n, res);
     
     for (int i = 0; i < a; ++i) {
         cout << res[i] << " ";
     }
-    
     return 0; 
 }
