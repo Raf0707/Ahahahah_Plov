@@ -25,7 +25,7 @@ void season(int mon)
     case 9:
     case 10:
     case 11:
-        cout << "Осень" << endl;
+        cout << "Это осень" << endl;
         break;
     default:
         cout << "Введите номер месяца от 1 до 12" << endl;
