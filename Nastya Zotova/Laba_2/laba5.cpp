@@ -7,7 +7,6 @@ typedef struct complex
 {
     double real;
     double imag;
-    ;
 
     void pokazatel()
     {
