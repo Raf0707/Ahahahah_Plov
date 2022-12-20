@@ -18,18 +18,14 @@ struct calculator {
 };
 int main()
 {
-	float a;
-	float b;
+	calculator calc;
 	int n;
 	cout << "Enter a" << endl;
-	cin >> a;
+	cin >> calc.a;
 	cout << "Enter b" << endl;
-	cin >> b;
+	cin >> calc.b;
 	cout << "Chose your operation \n 0:+ \n 1:- \n 2:/ \n 3:*" << endl;
 	cin >> n;
-	calculator calc;
-	calc.a = a;
-	calc.b = b;
 	float arr[4];
 	arr[0] = calc.plus();
 	arr[1] = calc.minus();
