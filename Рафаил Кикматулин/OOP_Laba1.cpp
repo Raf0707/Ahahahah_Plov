@@ -3,10 +3,8 @@
 #include <vector>
 #include <string>
 
-using namespace std;//
-
 enum Type {
-    art, tech, override
+    art, tech
 };
 
 
@@ -14,32 +12,32 @@ class Book {
 
 public:
 
-    Book(const string& _author, const string& _title, Type _bookType) {//const ref
+    Book(const std::string& _author, const std::string& _title, Type _bookType) {
         m_author = _author;
         m_title = _title;
         m_bookType = _bookType;
     }
 
-    Type getType() const {//get const
+    Type getType() const {
         return this->m_bookType;
     }
 
     virtual ~Book() { }
 
 private:
-    string m_author;
-    string m_title;
+    std::string m_author;
+    std::string m_title;
     Type m_bookType;
 
 };
 
 class Lib {
 public:
-    void bookTypeCounterSwitch(const vector<Book>& v) {
+    void bookTypeCounterSwitch() {
         int artCounter = 0;
         int techCounter = 0;
 
-        for (auto i : v) {//foreach
+        for (Book i : bookStorage) {
             switch (i.getType()) {
             case Type::art:
                 artCounter++;
@@ -51,38 +49,38 @@ public:
             }
         }
 
-        cout << "art: " << artCounter << endl;
-        cout << "tech: " << techCounter << endl;
+        std::cout << "art: " << artCounter << std::endl;
+        std::cout << "tech: " << techCounter << std::endl;
     }
 
-    void bookTypeCounter(vector<Book>& v) {
+    void bookTypeCounter() {
         int artCounter = 0;
         int techCounter = 0;
 
-        for (Book i : v) {
+        for (Book i : bookStorage) {//memory
             if (i.getType() == Type::art) {
-                artCounter++;
+                artCounter++;//postfix/prefix
             }
             else {
                 techCounter++;
             }
         }
 
-        cout << "art: " << artCounter << endl;
-        cout << "tech: " << techCounter << endl;
+        std::cout << "art: " << artCounter << std::endl;
+        std::cout << "tech: " << techCounter << std::endl;
     }
 
-    void addBook(const string& title, const string& author, const Type bookType) {
-        if (title.length() == 0 || author.length() == 0 || bookType == override) {
-            cout << "book is depricated. Enter title, author and overrided bookType" << endl;
+    void addBook(const std::string& title, const std::string& author, Type bookType) {
+        if (title.length() == 0 || author.length() == 0) {//empty
+            std::cout << "book is depricated. Enter title, author and overrided bookType" << std::endl;
         }
         else {
-            v.emplace_back(title, author, bookType);
+            bookStorage.emplace_back(title, author, bookType);
         }
     }
 
 private:
-    vector<Book> v;
+    std::vector<Book> bookStorage;
 };
 
 
@@ -92,20 +90,17 @@ int main()
 {
     Lib lib;
 
-    vector<Book> v;
+    std::vector<Book> myBookStorage;
 
-    v.emplace_back("author1", "titlr1", Type::art);
-    v.emplace_back("author2", "titlr2", Type::art);
-    v.emplace_back("author3", "titlr3", Type::art);
-    v.emplace_back("author4", "titlr4", Type::art);
-    v.emplace_back("author5", "titlr5", Type::tech);
-    v.emplace_back("author6", "titlr6", Type::tech);
-    v.emplace_back("author7", "titlr7", Type::tech);
-    v.emplace_back("author8", "titlr8", Type::tech);
+    lib.addBook("qwerty", "asdfgh", art);
+    lib.addBook("poiuyt", "lkhgf", tech);
 
-    lib.bookTypeCounterSwitch(v);
+    lib.addBook("qhqkj", "", art);
+    lib.addBook("", "tjkfl", tech);
 
-    lib.bookTypeCounter(v);
+    //lib.bookTypeCounterSwitch(book1);
+
+    //lib.bookTypeCounter(book1);
     
     std::cout << "End" << std::endl;
 
