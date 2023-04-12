@@ -3,68 +3,68 @@
 #include <string>
 #include <vector>
 
-using namespace std;
-
-class Car {
+class Car {//virtual table 
 
 private:
-    string make;
-    string model;
+    const std::string m_make;//
+    const std::string m_model;//
 
 public:
-    Car(string _make, string _model) : make(_make), model(_model) {}
+    Car(const std::string& _make, const std::string& _model) : m_make(_make), m_model(_model) {}//
+
+    virtual void print() const = 0;
 
     virtual ~Car() {
-        cout << "Make: " << make << ", Model: " << model << endl;
+        std::cout << "Make: " << m_make << ", Model: " << m_model << std::endl;
     }
 
 };
 
 class Mercedes : public Car {
 public:
-    Mercedes(string _model) : Car("Mercedes", _model) {}
-
+    Mercedes(const std::string& _model) : Car("Mercedes", _model) {}//
+    virtual void print() const { std::cout << "Mercedes" << std::endl; }
     virtual ~Mercedes() {}
 };
 
 class BMW : public Car {
 public:
-    BMW(string _model) : Car("BMW", _model) {}
-
+    BMW(const std::string& _model) : Car("BMW", _model) {}//
+    virtual void print() const  { std::cout << "BMW" << std::endl; }
     virtual ~BMW() {}
 };
 
 class Toyota : public Car {
 public:
-    Toyota(string _model) : Car("Toyota", _model) {}
-
+    Toyota(const std::string& _model) : Car("Toyota", _model) {}//
+    virtual void print() const  { std::cout << "Toyota" << std::endl; }
     virtual ~Toyota() {}
 };
 
 class Fort : public Car {
 public:
-    Fort(string _model) : Car("Fort", _model) {}
-
+    Fort(const std::string& _model) : Car("Fort", _model) {}//
+    virtual void print() const  { std::cout << "Fort" << std::endl; }
     virtual ~Fort() {}
 };
 
 class Jigul : public Car {
 public:
-    Jigul(string _model) : Car("Jigul", _model) {}
-
+    Jigul(const std::string& _model) : Car("Jigul", _model) {}//
+    virtual void print() const  { std::cout << "Jigul" << std::endl; }
     virtual ~Jigul() {}
 };
 
 int main() {
 
-    ifstream  inFile("carslaba.txt");
+    std::ifstream  inFile("carslaba.txt");
     if (inFile.fail()) {
-        cerr << "Failed to open file." << endl;
+        std::cerr << "Failed to open file." << std::endl;
         return 1;
     }
 
-    vector<Car*> cars;
-    string make, model;
+    std::vector<Car*> cars;
+    std::string make, model;
     while (inFile >> make >> model) {
         if (make == "Mercedes") {
             cars.push_back(new Mercedes(model));
@@ -82,7 +82,7 @@ int main() {
             cars.push_back(new Jigul(model));
         }
         else {
-            cerr << "Unknown car make: " << make << endl;
+            std::cerr << "Unknown car make: " << make << std::endl;
             continue;
         }
     }
