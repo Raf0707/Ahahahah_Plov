@@ -22,7 +22,7 @@ public:
         return this->m_bookType;
     }
 
-    virtual ~Book() { }
+    virtual ~Book() { std::cout << "Object is delete"; }
 
 private:
     std::string m_author;
@@ -32,19 +32,23 @@ private:
 };
 
 class Lib {
+
+private:
+    std::vector<Book> bookStorage;
+
 public:
     void bookTypeCounterSwitch() {
         int artCounter = 0;
         int techCounter = 0;
 
-        for (Book i : bookStorage) {
-            switch (i.getType()) {
+        for (const Book& book : bookStorage) {
+            switch (book.getType()) {
             case Type::art:
-                artCounter++;
+                ++artCounter;
                 break;
 
             case Type::tech:
-                techCounter++;
+                ++techCounter;
                 break;
             }
         }
@@ -57,12 +61,12 @@ public:
         int artCounter = 0;
         int techCounter = 0;
 
-        for (Book i : bookStorage) {//memory
-            if (i.getType() == Type::art) {
-                artCounter++;//postfix/prefix
+        for (const Book& book : bookStorage) {
+            if (book.getType() == Type::art) {
+                ++artCounter;
             }
             else {
-                techCounter++;
+                ++techCounter;
             }
         }
 
@@ -71,16 +75,13 @@ public:
     }
 
     void addBook(const std::string& title, const std::string& author, Type bookType) {
-        if (title.length() == 0 || author.length() == 0) {//empty
+        if (title.empty() || author.empty()) {
             std::cout << "book is depricated. Enter title, author and overrided bookType" << std::endl;
         }
         else {
             bookStorage.emplace_back(title, author, bookType);
         }
     }
-
-private:
-    std::vector<Book> bookStorage;
 };
 
 
@@ -98,10 +99,6 @@ int main()
     lib.addBook("qhqkj", "", art);
     lib.addBook("", "tjkfl", tech);
 
-    //lib.bookTypeCounterSwitch(book1);
-
-    //lib.bookTypeCounter(book1);
-    
     std::cout << "End" << std::endl;
 
 
