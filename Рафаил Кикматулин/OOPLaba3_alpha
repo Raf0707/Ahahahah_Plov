@@ -1,77 +1,99 @@
 #include "framework.h"  
-#include "WindowsProject2.h"  
 #include <Windows.h>  
 
-class Vector2D { 
-public: 
-    float x, y; 
+/*
+Лаб. 3
+1.
+Создать проект «Классическое приложение Windows»
+Задать класс Vector2D для работы с плоскими векторами и точками. Реализовать
+в этом классе алгебраические операции для полноценного использования этого
+класса при визуализации плоских геометрических фигур и их преобразований.
+(использовать дружественные операторные функции, например: Vector2D
+operator+(const Vector2D v1, const Vector2D v2); не забыть реализовать оператор
+присваивания).
+По обработке сообщения WM_PAINT осуществить построение 9 окружностей
+(Ellipse) (3 на 3), используя для задания сдвига класс Vector2D (т. е. функция Ellipse
+должна будет принимать параметры, задаваемые через объекты типа Vector2D).
+(Например, исходная точка для рисования окружности Vector2D p(10,20); первый
+сдвиг Vector2D p(30,0); следующая точка p1=p+v; и т. д. в цикле)
+2.
+Задать два иерархически связанных полиморфных класса: деталь и сборка (один
+из них базовый). Все конструкторы находятся в зоне protected (чтобы запретить
+явное создание). В main() следует создать несколько экземпляров указанных типов,
+помещая их в хранилище (vector), используя шаблонную дружественную функцию.
+Дополнить программу всем необходимым для ее правильной работы.
+*/
 
-    Vector2D(float x = 0.0f, float y = 0.0f) : x(x), y(y) {} 
+class Vector2D {
+public:
+    float x, y;
 
-    Vector2D operator+(const Vector2D& other) const { 
-        return Vector2D(x + other.x, y + other.y); 
-    } 
+    Vector2D(float x = 0.0f, float y = 0.0f) : x(x), y(y) {}
 
-    Vector2D& operator+=(const Vector2D& other) { 
-        x += other.x; 
-        y += other.y; 
-        return *this; 
-    } 
-}; 
+    Vector2D operator+(const Vector2D& other) const {
+        return Vector2D(x + other.x, y + other.y);
+    }
 
-void DrawEllipse(HDC hdc, const Vector2D& center, const double radius) { 
-    Ellipse(hdc, static_cast<int>(center.x - radius), static_cast<int>(center.y - radius), static_cast<int>(center.x + radius), static_cast<int>(center.y + radius)); 
-} 
+    Vector2D& operator+=(const Vector2D& other) {
+        x += other.x;
+        y += other.y;
+        return *this;
+    }
+};
 
-LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) { 
-    switch (message) { 
-    case WM_PAINT: 
-    { 
-        PAINTSTRUCT ps; 
-        HDC hdc = BeginPaint(hWnd, &ps); 
+void DrawEllipse(HDC hdc, const Vector2D& center, const double radius) {
+    Ellipse(hdc, static_cast<int>(center.x - radius), static_cast<int>(center.y - radius), static_cast<int>(center.x + radius), static_cast<int>(center.y + radius));
+}
 
-        const double radius = 30.0; 
-        const double margin = 30.0; 
-        const int num_circles = 9; 
+LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam) {
+    switch (message) {
+    case WM_PAINT:
+    {
+        PAINTSTRUCT ps;
+        HDC hdc = BeginPaint(hWnd, &ps);
 
-        Vector2D centers[num_circles]; 
-        for (int i = 0; i < num_circles; i++) { 
-            centers[i] = Vector2D(margin + (i % 3) * (radius * 2 + margin), margin + (i / 3) * (radius * 2 + margin)); 
-        } 
+        const double radius = 30.0;
+        const double margin = 30.0;
+        const int num_circles = 9;
 
-        int i = 0; 
-        while (i < num_circles) { 
-            DrawEllipse(hdc, centers[i], radius); 
-            i++; 
-        } 
+        Vector2D centers[num_circles];
+        for (int i = 0; i < num_circles; i++) {
+            centers[i] = Vector2D(margin + (i % 3) * (radius * 2 + margin), margin + (i / 3) * (radius * 2 + margin));
+        }
 
-        EndPaint(hWnd, &ps); 
-    } 
-    break; 
-    case WM_DESTROY: 
-        PostQuitMessage(0); 
-        break; 
-    default: 
-        return DefWindowProc(hWnd, message, wParam, lParam); 
-    } 
-    return 0; 
-} 
+        int i = 0;
+        while (i < num_circles) {
+            DrawEllipse(hdc, centers[i], radius);
+            i++;
+        }
 
-int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) { 
-    WNDCLASS wc = {}; 
-    wc.lpfnWndProc = WndProc; 
-    wc.hInstance = hInstance; 
-    wc.lpszClassName = L"WindowClass"; 
-    RegisterClass(&wc); 
+        EndPaint(hWnd, &ps);
+    }
+    break;
+    case WM_DESTROY:
+        PostQuitMessage(0);
+        break;
+    default:
+        return DefWindowProc(hWnd, message, wParam, lParam);
+    }
+    return 0;
+}
 
-    HWND hWnd = CreateWindow(wc.lpszClassName, L"Ellipses", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 640, 480, nullptr, nullptr, hInstance, nullptr); 
-    ShowWindow(hWnd, nCmdShow); 
+int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow) {
+    WNDCLASS wc = {};
+    wc.lpfnWndProc = WndProc;
+    wc.hInstance = hInstance;
+    wc.lpszClassName = L"WindowClass";
+    RegisterClass(&wc);
 
-    MSG msg = {}; 
-    while (GetMessage(&msg, nullptr, 0, 0)) { 
-        TranslateMessage(&msg); 
-        DispatchMessage(&msg); 
-    } 
+    HWND hWnd = CreateWindow(wc.lpszClassName, L"Ellipses", WS_OVERLAPPEDWINDOW, CW_USEDEFAULT, CW_USEDEFAULT, 640, 480, nullptr, nullptr, hInstance, nullptr);
+    ShowWindow(hWnd, nCmdShow);
 
-    return static_cast<int>(msg.wParam); 
+    MSG msg = {};
+    while (GetMessage(&msg, nullptr, 0, 0)) {
+        TranslateMessage(&msg);
+        DispatchMessage(&msg);
+    }
+
+    return static_cast<int>(msg.wParam);
 }
