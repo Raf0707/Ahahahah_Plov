@@ -107,5 +107,12 @@ int main() {
         obj->print();
         delete obj;
     }
+
+    db.clear();
+    delete detail1;
+    delete detail2;
+    delete assembly1;
+    delete assembly2;
+  
     return 0;
 }
