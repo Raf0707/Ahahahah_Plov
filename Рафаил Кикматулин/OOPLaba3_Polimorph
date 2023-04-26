@@ -1,0 +1,111 @@
+#include <iostream>
+#include <vector>
+#include <typeinfo>
+
+class Detail {
+protected:
+    Detail() {}
+public:
+    virtual ~Detail() {}
+    virtual Detail* clone() const = 0;
+    virtual void print() const = 0;
+};
+
+class Assembly : public Detail {
+protected:
+    Assembly() {}
+public:
+    virtual ~Assembly() {}
+    virtual Assembly* clone() const = 0;
+    virtual void print() const = 0;
+};
+
+class Part1 : public Detail {
+public:
+    Part1() {}
+    Part1(const Part1& other) {}
+    virtual ~Part1() {}
+    virtual Part1* clone() const {
+        return new Part1(*this);
+    }
+    virtual void print() const {
+        std::cout << "Part1" << std::endl;
+    }
+};
+
+class Part2 : public Detail {
+public:
+    Part2() {}
+    Part2(const Part2& other) {}
+    virtual ~Part2() {}
+    virtual Part2* clone() const {
+        return new Part2(*this);
+    }
+    virtual void print() const {
+        std::cout << "Part2" << std::endl;
+    }
+};
+
+class Assembly1 : public Assembly {
+private:
+    Part1* part1_;
+    Part2* part2_;
+public:
+    Assembly1() : part1_(new Part1()), part2_(new Part2()) {}
+    Assembly1(const Assembly1& other) : part1_(new Part1(*(other.part1_))), part2_(new Part2(*(other.part2_))) {}
+    virtual ~Assembly1() {
+        delete part1_;
+        delete part2_;
+    }
+    virtual Assembly1* clone() const {
+        return new Assembly1(*this);
+    }
+    virtual void print() const {
+        std::cout << "Assembly1: ";
+        part1_->print();
+        part2_->print();
+    }
+};
+
+class Assembly2 : public Assembly {
+private:
+    Part2* part2_;
+public:
+    Assembly2() : part2_(new Part2()) {}
+    Assembly2(const Assembly2& other) : part2_(new Part2(*(other.part2_))) {}
+    virtual ~Assembly2() {
+        delete part2_;
+    }
+    virtual Assembly2* clone() const {
+        return new Assembly2(*this);
+    }
+    virtual void print() const {
+        std::cout << "Assembly2: ";
+        part2_->print();
+    }
+};
+
+template <typename T>
+void my_copy(T* obj, std::vector<Detail*>& db) {
+    db.push_back(obj->clone());
+}
+
+int main() {
+    std::vector<Detail*> db;
+    Detail* detail1 = new Part1();
+    Detail* detail2 = new Part2();
+    Assembly* assembly1 = new Assembly1();
+    Assembly* assembly2 = new Assembly2();
+
+    my_copy(detail1, db);
+    my_copy(detail2, db);
+    my_copy(assembly1, db);
+    my_copy(assembly2, db);
+
+    for (auto obj : db) {
+        std::cout << typeid(*obj).name() << std::endl;
+        obj->print();
+        delete obj;
+    }
+    return 0;
+}
